@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Registration System</title>
+</head>
+<body>
+
+    <h1 align="center">Volunteer Registration System</h1>
+    <hr>
+    <br>
+    <h2 align="center"><%= singleVolunteer ? 'Upadate' : 'Add' %> Volunteer Details</h2>
+    <br>
+
+    <form action="/add" method="post" align="center">
+        <input type="text" name="id" value="<%= singleVolunteer ? singleVolunteer.id : '' %>" hidden />
+        <table align="center" border="1" cellpadding="5px" width="500px">
+            <tbody>
+                <tr>
+                    <td><label>Enter Name :-</label></td>
+                    <td><input style="width: 98%;border: none;outline: none;" type="text" name="name" placeholder="Name" value="<%= singleVolunteer ? singleVolunteer.name : '' %>"></td>
+                </tr>
+                <tr>
+                    <td><label>Enter Email :-</label></td>
+                    <td><input style="width: 98%;border: none;outline: none;" type="email" name="email" placeholder="xyz123@gmail.com" value="<%= singleVolunteer ? singleVolunteer.email : '' %>"></td>
+                </tr>
+                <tr>
+                    <td><label>Enter Contact :-</label></td>
+                    <td><input style="width: 98%;border: none;outline: none;" type="number" name="contact" placeholder="Contact" value="<%= singleVolunteer ? singleVolunteer.contact : '' %>"></td>
+                </tr>
+                <tr>
+                    <td><label>Enter Skills :-</label></td>
+                    <td><input style="width: 98%;border: none;outline: none;" type="text" name="skills" placeholder="Skills" value="<%= singleVolunteer ? singleVolunteer.skills : '' %>"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button style="padding: 5px 20px;" type="submit"><%= singleVolunteer ? 'Upadate' : 'Add' %></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>    
+    </form>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <h2 align="center">Volunteer List</h2>
+    <br>
+
+    <table align="center" border="1" cellpadding="7px" width="1000px">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Skills</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% volunteers.forEach(volunteer => { %>
+                <tr align="center">
+                    <td><%= volunteer.id %></td>
+                    <td><%= volunteer.name %></td>
+                    <td><%= volunteer.email %></td>
+                    <td><%= volunteer.contact %></td>
+                    <td><%= volunteer.skills %></td>
+                    <td>
+                        <a style="text-decoration: none;background-color: rgb(75, 86, 180);padding: 5px 20px;border-radius: 7px;color: #fff;" href="/edit/<%= volunteer.id %>">Edit</a>
+                        ||
+                        <a style="text-decoration: none;background-color: rgb(227, 59, 37);padding: 5px 20px;border-radius: 7px;color: #fff;" href="/delete/<%= volunteer.id %>">Delete</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+</body>
+</html>
